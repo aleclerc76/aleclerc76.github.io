@@ -9,7 +9,7 @@ nav: true
 <div style="margin:2cm;" markdown="1">
 
 ### 2021 -- 2024 : INSA Rouen Normandie
-During my PhD, I taught various courses about mathematics to bachelor students at INSA Rouen Normandie.
+During my PhD, I taught various courses about mathematics to engineering students at INSA Rouen Normandie.
 
 <div style="margin:1cm;" markdown="1">
 
