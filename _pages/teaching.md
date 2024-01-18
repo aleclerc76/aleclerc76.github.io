@@ -5,9 +5,13 @@ title: teaching
 description: Summary of my teaching activities
 nav: true
 ---
+
+<div style="margin:2cm;" markdown="1">
+
 ### 2021 -- 2024 : INSA Rouen Normandie
 During my PhD, I taught various courses about mathematics to bachelor students at INSA Rouen Normandie.
 
+<div style="margin:1cm;" markdown="1">
 
 | Year  | Course | Level |
 |-------|--------|---------|
@@ -19,5 +23,8 @@ During my PhD, I taught various courses about mathematics to bachelor students a
 | 2021-2022 | {::nomarkdown}<details><summary>Statistics (Teaching Assistant)</summary> <ul><li>Descriptive statistics</li><li>Principal component analysis</li><li>Statistic tests</li></ul>{:/} | Second year |
 |-------|--------|---------|
 
+</div>
 
 Click on the title of the course to see more details about the syllabus.
+
+</div>

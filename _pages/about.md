@@ -1,7 +1,9 @@
 ---
 permalink: /
-title: "Augustin LECLERC"
-excerpt: "About me"
+title: Augustin <strong>LECLERC</strong>
+profile:
+  align: right
+  image: profil.jpg
 author_profile: true
 redirect_from:
   - /about/
