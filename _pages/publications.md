@@ -9,11 +9,24 @@ description: List of my publications and talks
 
 ### Publications
 
+## Articles
+
 <div style="margin:1cm;" markdown="1">
 
 | Year  | Status | Title | Link |
 |-------|--------|---------|---------|
 | 2024 | In preparation | {::nomarkdown}<details><summary> Linearized absorbing boundary condition for an open Helmholtz eigenvalue problem </summary> <ul> Differential geometry </ul></details{:/} | None yet |
+|-------|--------|---------|---------|
+
+</div>
+
+## Conferences
+
+<div style="margin:1cm;" markdown="1">
+
+| Year  | Conference | Title | Support |
+|-------|--------|---------|---------|
+| 2022 | CANUM | {::nomarkdown}<details><summary> Calculs de modes dans un guide d’ondes ouvert </summary> <ul> Mettre le lien ici </ul></details{:/} | Poster |
 |-------|--------|---------|---------|
 
 </div>
