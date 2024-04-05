@@ -26,7 +26,7 @@ description: List of my publications and talks
 
 | Year  | Conference | Title | Support |
 |-------|--------|---------|---------|
-| 2022 | CANUM | {::nomarkdown}<details><summary> Calculs de modes dans un guide d’ondes ouvert </summary> <ul> Mettre le lien ici </ul></details{:/} | Poster |
+| 2022 | CANUM | {::nomarkdown}<details><summary> Calculs de modes dans un guide d’ondes ouvert </summary> <ul> <a href='../files/Poster_CANUM.pdf'> See the poster </a> </ul></details{:/} | Poster |
 |-------|--------|---------|---------|
 
 </div>
