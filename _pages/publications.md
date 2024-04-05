@@ -7,7 +7,7 @@ description: List of my publications and talks
 
 <div style="margin:2cm;" markdown="1">
 
-### Publications
+# Publications
 
 ## Articles
 
@@ -26,7 +26,8 @@ description: List of my publications and talks
 
 | Year  | Conference | Title | Support |
 |-------|--------|---------|---------|
-| 2022 | CANUM | {::nomarkdown}<details><summary> Calculs de modes dans un guide d’ondes ouvert </summary> <ul> <a href='../files/Poster_CANUM.pdf'> See the poster </a> </ul></details{:/} | Poster |
+| 2022 | Waves 2022 | {::nomarkdown}<details><summary> Modal computation for open waveguides </summary> <ul> Slides soon </ul></details{:/} | Talk |
+| 2022 | CANUM 2022 | {::nomarkdown}<details><summary> Calculs de modes dans un guide d’ondes ouvert </summary> <ul> <a href='../files/Poster_CANUM.pdf'> See the poster </a> </ul></details{:/} | Poster |
 |-------|--------|---------|---------|
 
 </div>
