@@ -7,7 +7,6 @@
     <title>Research</title>
   </head>
 
-  <script type="text/javascript" src="scripts.js"></script>
 
   <body>
     <nav>
@@ -26,6 +25,104 @@
     </nav>
 
     <main>
+
+        <h1>Helmholtz Eigenvalue Problems</h1>
+                
+            <p>
+                In <a href="https://authors.elsevier.com/a/1mlnG3CDPQIGD9">my work</a>, I address the computational challenges of simulating guided waves in open waveguides.
+                Accurate simulations require defining a finite computational area using <strong>Absorbing Boundary Conditions (ABCs)</strong>. However, traditional ABCs create non-linear eigenvalue problems that are notoriously expensive to solve. 
+                These typically require complex iterative algorithms that struggle with speed and efficiency when identifying multiple propagating modes.
+            </p>
+
+            <p>
+                I have developed a new class of <strong>linearized ABCs</strong> that significantly reduce computational cost without sacrificing accuracy. By applying Newton’s algorithm to generate a rational approximation of the boundary operators, the system is transformed into a linear eigenvalue problem. 
+            </p>
+
+            <div class="figure-wrapper" style="max-width: 1000px;">
+                <div class="comparison-container" style="margin-bottom: 100px; ">
+                    <img src="images/BF1.png" alt="Lagrange elements discretization" class="comparison-image" class="contain" width=20% height=20%>
+
+                    <img src="images/BF0.png" alt="Learnt elements discretization" class="comparison-image" class="contain" width=20% height=20%>
+
+                    <img src="images/BF2.png" alt="Learnt elements discretization" class="comparison-image" class="contain" width=20% height=20%>
+                </div>
+            </div>
+        
+        <h1>Maxwell Eigenvalue Problems</h1>
+
+        <h2>Open and straight electromagnetic waveguides</h2>
+            <p>
+                My research extends linearized boundary treatment to the full vectorial Maxwell system. This is crucial for modeling electromagnetic wave propagation in complex, multi-material environments like submarine cables.
+            </p>
+
+            <p>
+                In an infinite, homogeneous exterior domain, electromagnetic fields can be decomposed into longitudinal components. 
+                Since these components individually satisfy the Helmholtz equation, the BGT-type Absorbing Boundary Conditions can be applied to each one of these components. 
+                The physical coupling is maintained at the material interfaces within the computational domain.
+            </p>
+            
+            <div class="figure-wrapper">
+                <div class="comparison-container">
+                    <img src="images/ModeEM_CableDroit.gif" alt="Lagrange elements discretization" class="comparison-image" class="contain" width=100% height=100%>
+                </div>
+
+                <p class="figure-caption">
+                    Quasi-TEM mode inside (top) and outside (bottom) the cable. Here, the waveguide is bounded with BGT-like ABCs.
+                </p>
+            </div>
+        
+        <h2>Twisted electromagnetic waveguides</h2>
+
+            <p>
+                While standard models assume longitudinal invariance, real-world industrial cables feature conductors and armoring that are physically twisted. 
+                My research addresses the significant mathematical and computational challenges introduced by this helical symmetry.
+            </p>
+
+            <p>
+                It has been shown that a twisted waveguide with homogeneous and isotropic components can be modelled equivalently by a straight waveguide with inhomogeneous and anisotropic components.
+                My contribution is the reformulation of the modal problem of the twisted guide as an eigenvalue problem on the longitudinal fields in the helical coordinate system.
+            </p>
+
+            <div class="figure-wrapper">
+                <div class="comparison-container">
+                    <img src="images/ModeEM_CableTorsade3m_1periode.gif" alt="Lagrange elements discretization" class="comparison-image" class="contain" width=100% height=100%>
+                </div>
+
+                <p class="figure-caption">
+                    Electromagnetic mode inside (top) and outside (bottom) the cable. Here, the waveguide is bounded with a perfect electric conductor boundary.
+                </p>
+            </div>
+
+        <h1>Model Reduction</h1>
+
+        <p>
+            My research focuses on the numerical simulation of electromagnetic wave propagation within multi-scale structures, specifically addressing the computational challenges inherent in the Boundary Element Method (BEM). The presence of fine geometric details, such as narrow slots, induces field singularities that necessitate extreme mesh refinement. This constraint leads to the generation of massive, dense linear systems that are often computationally prohibitive in terms of both processing time and memory allocation.
+        </p>
+        <p>
+            To overcome these limitations, we propose a data-driven model order reduction technique designed to condense the physical influence of such singularities. By partitioning the BEM system into distinct interaction blocks and algebraic reducing techniques on the singular zone (SVD, least-square minimisation, ...), we represent the solution within a low-dimensional vector space. This space describes fonctions that preserve the physical impact of the slot while significantly reducing the global system's degrees of freedom.
+        </p>
+
+        <div class="figure-wrapper">
+        
+            <div class="comparison-container">
+                <img src="images/Base_P1.jpg" alt="Lagrange elements discretization" class="comparison-image" class="contain" width=35% height=35%>
+
+                <div class="comparison-arrow">&rarr;</div>
+
+                <img src="images/Base_Reduite.jpg" alt="Learnt elements discretization" class="comparison-image" class="contain" width=35% height=35%>
+            </div>
+
+            <p class="figure-caption">
+                Comparison between standard discretization using Lagrange elements (left) and the data-driven reduced basis on the slot area (right).
+            </p>
+        </div>
+
+        <p>
+            The robustness of this methodology has been demonstrated through 2D electromagnetic simulations. The model accurately predicts solutions for other unseen geometries. 
+            Building on these results, current experimentation is extending this framework to more complex and computationally demanding 3D problems, 
+            where the methodology continues to show highly promising performance for realistic industrial applications.
+        </p>
+
         
     </main>
   </body>

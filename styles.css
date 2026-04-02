@@ -265,3 +265,44 @@ tfoot td {
     font-family: Verdana, serif;
     font-stretch: extra-expanded;
 }
+
+.figure-wrapper {
+    /*max-width: 1000px; /* Largeur maximale de l'ensemble (optionnel, à adapter) */
+    margin: 40px auto; /* Centre le wrapper sur la page avec de l'espace haut/bas */
+    text-align: center; /* Centre les éléments enfants, y compris la légende */
+}
+
+/* Conteneur spécifique pour les images et la flèche */
+.comparison-container {
+    display: flex; /* Active Flexbox */
+    align-items: center; /* Aligne verticalement au centre (images + flèche) */
+    justify-content: space-around; /* Espace équitablement les éléments */
+    flex-wrap: nowrap; /* Empêche de passer à la ligne sur petit écran */
+    margin-bottom: 20px; /* Espace avant le texte du dessous */
+}
+
+/* Style commun pour les images */
+.comparison-image {
+    max-width: 40%; /* Chaque image prend au maximum 40% de la largeur du conteneur */
+    height: auto; /* Garde les proportions */
+    border: 1px solid #ddd; /* Optionnel : petite bordure */
+    border-radius: 4px; /* Optionnel : coins arrondis */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optionnel : légère ombre */
+}
+
+/* Style spécifique pour la grosse flèche rouge */
+.comparison-arrow {
+    flex: 0 0 auto; /* La flèche ne rétrécit pas et ne grandit pas */
+    font-size: 5em; /* Taille très grosse (adaptable) */
+    color: red; /* Couleur rouge */
+    line-height: 1; /* Aligne mieux la flèche verticalement */
+    padding: 0 10px; /* Espace horizontal autour de la flèche */
+}
+
+/* Style pour la légende centrée en dessous */
+.figure-caption {
+    font-size: 1.1em;
+    color: #bbb;
+    margin: 0;
+    font-weight: normal; /* Change to 'bold' if you prefer */
+}
