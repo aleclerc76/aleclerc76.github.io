@@ -3,8 +3,10 @@
 
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Research of Augustin Leclerc: Helmholtz and Maxwell eigenvalue problems, absorbing boundary conditions and model order reduction for the Boundary Element Method." />
     <link rel="stylesheet" href="styles.css">
-    <title>Research</title>
+    <title>Research — Augustin Leclerc</title>
   </head>
 
 
@@ -12,11 +14,12 @@
     <nav>
         <div class="box">
             <p align="center">
-                <img src="images/profil.jpg" alt="personal picture" class="contain" width=80% height=80% box-shadow:8px 8px 10px 0 rgba(0,0,0,0.5)/>
+                <img src="images/profil.jpg" alt="Augustin Leclerc" class="contain" />
             </p>
         </div>
         <p class="name"><a href="index.html">Augustin Leclerc</a></p>
-        <p class="mail">augustin.leclerc@inria.fr</p>
+        <p class="tagline">Postdoctoral researcher in Applied Mathematics<br />Wave propagation &middot; Numerical simulation</p>
+        <p class="mail"><a href="mailto:augustin.leclerc@inria.fr">augustin.leclerc@inria.fr</a></p>
         <ul>
             <li><a href="publications.html">Publications and talks</a></li>
             <li class="active"><a>Research</a></li>
@@ -38,14 +41,18 @@
                 I have developed a new class of <strong>linearized ABCs</strong> that significantly reduce computational cost without sacrificing accuracy. By applying Newton’s algorithm to generate a rational approximation of the boundary operators, the system is transformed into a linear eigenvalue problem. 
             </p>
 
-            <div class="figure-wrapper" style="max-width: 1000px;">
-                <div class="comparison-container" style="margin-bottom: 100px; ">
-                    <img src="images/BF1.png" alt="Lagrange elements discretization" class="comparison-image" class="contain" width=20% height=20%>
+            <div class="figure-wrapper">
+                <div class="comparison-container">
+                    <img src="images/BF1.png" alt="Computed eigenmode, first configuration" class="comparison-image">
 
-                    <img src="images/BF0.png" alt="Learnt elements discretization" class="comparison-image" class="contain" width=20% height=20%>
+                    <img src="images/BF0.png" alt="Computed eigenmode, second configuration" class="comparison-image">
 
-                    <img src="images/BF2.png" alt="Learnt elements discretization" class="comparison-image" class="contain" width=20% height=20%>
+                    <img src="images/BF2.png" alt="Computed eigenmode, third configuration" class="comparison-image">
                 </div>
+
+                <p class="figure-caption">
+                    Guided modes computed with the linearized absorbing boundary conditions.
+                </p>
             </div>
         
         <h1>Maxwell Eigenvalue Problems</h1>
@@ -63,7 +70,7 @@
             
             <div class="figure-wrapper">
                 <div class="comparison-container">
-                    <img src="images/ModeEM_CableDroit.gif" alt="Lagrange elements discretization" class="comparison-image" class="contain" width=100% height=100%>
+                    <img src="images/ModeEM_CableDroit.gif" alt="Animated quasi-TEM mode in a straight cable" class="comparison-image">
                 </div>
 
                 <p class="figure-caption">
@@ -85,7 +92,7 @@
 
             <div class="figure-wrapper">
                 <div class="comparison-container">
-                    <img src="images/ModeEM_CableTorsade3m_1periode.gif" alt="Lagrange elements discretization" class="comparison-image" class="contain" width=100% height=100%>
+                    <img src="images/ModeEM_CableTorsade3m_1periode.gif" alt="Animated electromagnetic mode in a twisted cable" class="comparison-image">
                 </div>
 
                 <p class="figure-caption">
@@ -105,11 +112,11 @@
         <div class="figure-wrapper">
         
             <div class="comparison-container">
-                <img src="images/Base_P1.jpg" alt="Lagrange elements discretization" class="comparison-image" class="contain" width=35% height=35%>
+                <img src="images/Base_P1.jpg" alt="Standard Lagrange element discretization" class="comparison-image">
 
                 <div class="comparison-arrow">&rarr;</div>
 
-                <img src="images/Base_Reduite.jpg" alt="Learnt elements discretization" class="comparison-image" class="contain" width=35% height=35%>
+                <img src="images/Base_Reduite.jpg" alt="Data-driven reduced basis on the slot area" class="comparison-image">
             </div>
 
             <p class="figure-caption">

@@ -1,220 +1,436 @@
-/*
-    MEMO
-    padding/argin directions : top right bottom left
+/* ==========================================================================
+   Augustin Leclerc — personal research site
+   Theme: wave propagation & numerical analysis
+   ========================================================================== */
 
-*/
-/* .FixedHeightContainer
-{   
-    height: 100vh;   
-    padding:3px; 
-    overflow: auto;
-} */
-
-/* .Content
-{
-    height: 100%;
-    overflow: auto;
-    background: #fff;
-} */
-
-/* Colors and variables (to be called with attribute: var(--name-of-variable); */
 :root {
-    /* colors */
-    --main-color: #111; /* Background */
-    --light-color: #222; /* Navigation bar */
-    --light-color-hover: #333;
-    --other-light-color: #19a;
-    --link-color: #2ee;
-    --text-color: #eee;
-    /* sizes */
-    --nav-width: 24em;
+    /* Surfaces, from deepest to lightest */
+    --bg: #070d18;
+    --nav-bg: #0a1223;
+    --surface: #101c30;
+    --surface-hover: #18273f;
+    --border: #1f3050;
+    --border-soft: #16233a;
+
+    /* Text */
+    --text: #e9eff9;
+    --text-muted: #90a3c1;
+    --text-faint: #6a7d9c;
+
+    /* Accents: wave crest (sky) and secondary mode (violet) */
+    --accent: #38bdf8;
+    --accent-strong: #7dd3fc;
+    --accent-alt: #a78bfa;
+    --accent-soft: rgba(56, 189, 248, 0.12);
+
+    /* Sizes */
+    --nav-width: 21em;
+    --content-width: 82ch;
 }
 
-/* Local fonts */
+/* --------------------------------------------------------------------------
+   Local fonts
+   -------------------------------------------------------------------------- */
+
 @font-face {
-    font-family: "AbrilFatFace";
-    src: url("fonts/AbrilFatface-Regular.ttf");
+    font-family: "Gentium Book Plus";
+    src: url("fonts/GentiumBookPlus-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 @font-face {
-    font-family: "Galileo-Bold";
-    src: url("fonts/GalileoFLF-Bold.ttf");
+    font-family: "Gentium Book Plus";
+    src: url("fonts/GentiumBookPlus-Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Gentium Book Plus";
+    src: url("fonts/GentiumBookPlus-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Gentium Book Plus";
+    src: url("fonts/GentiumBookPlus-BoldItalic.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
 }
 @font-face {
     font-family: "Quando";
-    src: url("fonts/Quando-Regular.ttf");
+    src: url("fonts/Quando-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
-a, a:link, a:visited, a:hover, a:active {
-    text-decoration: none;
-    color: var(--link-color);
-}
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
 
-li a {
-    display: block; /* make links in list be cliquable as blocks (and not just the very text of the link */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
-
-h1 {
-    font-family: "Quando", serif;
-    /* line-height: 1.5em; */
-    padding-bottom: 0.5em;
-}
-
-h2 {
-    font-size: larger;
-}
-
-/* General body settings */
 
 html {
     height: 100%;
+    background-color: var(--bg);
+    /* Soft glows for warmth, over a faint sine-wave field */
+    background-image:
+        radial-gradient(1100px 600px at 18% -12%, rgba(56, 189, 248, 0.10), transparent 62%),
+        radial-gradient(900px 520px at 92% 4%, rgba(167, 139, 250, 0.07), transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='150' viewBox='0 0 420 150'%3E%3Cpath d='M0 60 Q52.5 18 105 60 T210 60 T315 60 T420 60' fill='none' stroke='%2338bdf8' stroke-opacity='.05' stroke-width='1'/%3E%3Cpath d='M0 104 Q52.5 76 105 104 T210 104 T315 104 T420 104' fill='none' stroke='%23a78bfa' stroke-opacity='.032' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat: no-repeat, no-repeat, repeat;
+    background-attachment: fixed, fixed, fixed;
 }
 
 body {
-    /* font: 1em/150% Helvetica, Arial, sans-serif; */
-    /* font: 1em/150% "Charter BT", Arial, sans-serif; */
-    font: 1em/150% "Gentium", Helvetica, Arial, sans-serif;
-    padding: 2em;
-    padding-top: 1em;
-    margin: 0 0 0 var(--nav-width); 
-    /* max-width: 100em; */
-    background-color: var(--main-color);
-    color: var(--text-color);
-    display: flex;
-    min-height: 100%;  
+    font: 400 1em/1.65 "Gentium Book Plus", Georgia, serif;
+    color: var(--text);
+    background: transparent;
+    margin: 0 0 0 var(--nav-width);
+    padding: 3.5em 2.5em 5em;
+    min-height: 100%;
+    -webkit-font-smoothing: antialiased;
 }
 
-body, nav {
-    /* Source https://codepen.io/stephen1on1/pen/VeyNZo */
-    background-image: url(data:image/png;base64,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);
+a,
+a:link,
+a:visited {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-/* Navigation bar */
+a:hover,
+a:active {
+    color: var(--accent-strong);
+    border-bottom-color: var(--accent-strong);
+}
+
+strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------------- */
 
 nav {
-    /* height: auto; */
-    /* height: max-content; */
-    /* height: initial; */
-    /* height: 100vh; */
-    height: 100%;
-    /* flex: 1; */
     position: fixed;
-    background-color: var(--light-color);
-    margin: 0em;
-    padding: 0em;
-    top: 0em;
-    /* bottom: 0; */
-    left: 0em;
+    top: 0;
+    left: 0;
     width: var(--nav-width);
+    height: 100%;
+    overflow-y: auto;
+    padding: 2.2em 0 2em;
+    background-color: var(--nav-bg);
+    /* Triangular mesh: a nod to finite/boundary element discretization */
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52' viewBox='0 0 60 52'%3E%3Cg fill='none' stroke='%2338bdf8' stroke-opacity='.055' stroke-width='.8'%3E%3Cpath d='M0 0 L30 52 L60 0'/%3E%3Cpath d='M0 52 L30 0 L60 52'/%3E%3Cpath d='M0 0 H60'/%3E%3Cpath d='M0 52 H60'/%3E%3C/g%3E%3C/svg%3E");
+    border-right: 1px solid var(--border-soft);
+}
+
+nav .box {
+    padding: 0 3.2em;
+}
+
+nav .box p {
+    margin: 0;
+}
+
+nav div img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 5 / 7;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    box-shadow:
+        0 0 0 6px rgba(56, 189, 248, 0.07),
+        0 14px 34px rgba(0, 0, 0, 0.55);
 }
 
 nav p.name {
     text-align: center;
-    /* font-family: "Palatino", Arial, Serif; */
-    /* font-family: "Calisto MT", 'Lucida Bright', sans-serif; */
-    /* font-family: "AbrilFatface", serif; */
-    /* font-family: "Galileo-Bold", serif; */
-    font-family: "Quando", serif;
-    font-size: 3rem;
-    line-height: 3rem; 
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    /* line-height: 1.5rem;  */
+    font-family: "Quando", Georgia, serif;
+    font-size: 2.1rem;
+    line-height: 1.2;
+    margin: 1.1em 0.6rem 0.35em;
+}
+
+nav p.name a,
+nav p.name a:link,
+nav p.name a:visited {
+    color: var(--text);
+    border-bottom: none;
+}
+
+nav p.name a:hover {
+    color: var(--accent-strong);
+}
+
+nav p.tagline {
+    text-align: center;
+    margin: 0 1.6rem 0.9em;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    font-style: italic;
 }
 
 nav p.mail {
     text-align: center;
-    /* font-family: "Lucida Console", Courier, monospace; */
-    /* font-family: "Quando", serif; */
-    /* font-family: 'URW Chancery', sans-serif; */
-    font: 1em/150% "Gentium", Helvetica, Arial, sans-serif;
-    font-size: 1.5rem;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin: 0 1rem 1.6em;
+    font-size: 0.95rem;
+    word-break: break-word;
 }
-
-/* nav p.desc {
-    text-align: center;
-    font-family: "Arial narrow", sans-serif;
-    font-size: 1.4rem;
-} */
 
 nav ul {
-    /* font-family: 'URW Chancery', sans-serif; */
-    font: 1em/150% "Gentium", Helvetica, Arial, sans-serif;
-    /* font-family: sans-serif; */
-    font-size: 2rem;
-    line-height: 1.2;
-    list-style-type: none;
-    margin: 0em;
-    padding: 0em;
-    /* display: block;  */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.05rem;
+    border-top: 1px solid var(--border-soft);
 }
 
-nav ul li { /* list elements inside an Unordered List inside the nav bar */
-    text-decoration: none;
-    display: block; 
+nav ul li {
+    display: block;
+    border-bottom: 1px solid var(--border-soft);
 }
 
-nav ul li a {
-    padding: 1rem 1rem 1rem 3rem;
+nav ul li a,
+nav ul li > a:link,
+nav ul li > a:visited {
+    display: block;
+    padding: 0.95rem 1.4rem 0.95rem 2.4rem;
+    color: var(--text-muted);
+    border-bottom: none;
+    border-left: 3px solid transparent;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+nav ul li:hover {
+    background-color: var(--surface-hover);
+}
+
+nav ul li:hover a {
+    color: var(--text);
+    border-left-color: var(--accent);
 }
 
 nav ul li.active {
-    border-right: 0.4rem solid var(--link-color);
-    /* border-left-color: var(--link-color);
-    border-left-width: 1em; */
+    background-color: var(--accent-soft);
 }
 
-nav ul li:hover { 
-    background-color: var(--light-color-hover);
-    font-weight: bold;
+nav ul li.active a {
+    color: var(--accent-strong);
+    border-left-color: var(--accent);
+    font-weight: 700;
+    cursor: default;
 }
 
-nav div img { /* make the personal image fit the width of the navigation bar */
-    max-width: 100%; 
-}
-
-/* Styling the lists */
+/* --------------------------------------------------------------------------
+   Main content and typography
+   -------------------------------------------------------------------------- */
 
 main {
-    font-size: 1.2rem;
+    max-width: min(var(--content-width), 100%);
+    margin: 0 auto;
+    font-size: 1.12rem;
+}
+
+img {
+    max-width: 100%;
+}
+
+main > p {
+    color: #dbe5f4;
+}
+
+h1 {
+    font-family: "Quando", Georgia, serif;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #fff;
+    margin: 2.6em 0 0.9em;
+    padding-bottom: 0.55rem;
+    /* A single wave crest as a section rule */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='8' viewBox='0 0 120 8'%3E%3Cpath d='M0 6 Q15 0 30 6 T60 6 T90 6 T120 6' fill='none' stroke='%2338bdf8' stroke-width='1.6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 120px 8px;
+}
+
+main > h1:first-child,
+main > *:first-child h1 {
+    margin-top: 0;
+}
+
+h2 {
+    font-family: "Quando", Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--accent-strong);
+    margin: 2em 0 0.6em;
+}
+
+h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 2.2em 0 0.8em;
+}
+
+p {
+    margin: 0 0 1.1em;
+}
+
+/* --------------------------------------------------------------------------
+   Layout helpers
+   -------------------------------------------------------------------------- */
+
+.block {
+    margin: 0 0 2.4em;
+    padding-left: 1.4em;
+    border-left: 2px solid var(--border);
+}
+
+/* Interest tags on the home page */
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 0.9em;
+    padding: 0;
+    list-style: none;
+}
+
+.chips li {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.95rem;
+    color: var(--accent-strong);
+    background-color: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+}
+
+.chip-group {
+    margin: 0 0 1.5em;
+}
+
+.chip-group > h3 {
+    margin: 0 0 0.6em;
+    font-size: 0.82rem;
+}
+
+/* Publication and talk entries */
+
+.entry {
+    margin: 0 0 1.1em;
+    padding: 0.9em 1.1em;
+    background-color: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--border);
+    border-radius: 4px;
+    transition: border-left-color 0.15s ease, background-color 0.15s ease;
+}
+
+.entry:hover {
+    background-color: var(--surface-hover);
+    border-left-color: var(--accent);
+}
+
+.entry p {
+    margin: 0;
+}
+
+.entry .note {
+    display: inline-block;
+    margin-left: 0.3em;
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--text-faint);
+}
+
+/* --------------------------------------------------------------------------
+   Tables
+   -------------------------------------------------------------------------- */
+
+/* Wide tables scroll inside their own container instead of stretching the page */
+.table-wrap {
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 table {
+    width: 100%;
+    min-width: 34em;
     border-collapse: collapse;
-    border: 2px solid rgb(140 140 140);
-    font-family: sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-  }
+    font-family: "Gentium Book Plus", Georgia, serif;
+    font-size: 0.98rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+}
 
 caption {
     caption-side: bottom;
     padding: 10px;
-    font-weight: bold;
+    color: var(--text-muted);
+    font-style: italic;
 }
 
-thead,
-tfoot {
-    background-color: rgb(228 240 245);
-    color: rgb(39, 60, 87);
-    font-size: 1.0rem;
-    font-family: CharterBT;
+thead {
+    background-color: var(--surface-hover);
+}
+
+thead th {
+    color: var(--accent-strong);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: left;
 }
 
 th,
 td {
-    border: 1px solid rgb(160 160 160);
-    padding: 8px 10px;
-}
-
-td:last-of-type {
-    text-align: center;
+    border: 1px solid var(--border-soft);
+    padding: 0.7rem 0.9rem;
+    vertical-align: top;
 }
 
 tbody > tr:nth-of-type(even) {
-    background-color: rgb(237 238 242);
-    color: rgb(0 0 0);
+    background-color: rgba(255, 255, 255, 0.02);
+    color: inherit;
+}
+
+tbody > tr:hover {
+    background-color: var(--surface-hover);
+}
+
+tbody td:first-child {
+    white-space: nowrap;
+    color: var(--text-muted);
+}
+
+td:last-of-type {
+    text-align: left;
+    color: var(--text-muted);
 }
 
 tfoot th {
@@ -222,87 +438,195 @@ tfoot th {
 }
 
 tfoot td {
-    font-weight: bold;
+    font-weight: 700;
 }
 
-/* .title {
-    text-decoration: underline;
-} */
+/* Collapsible syllabus details inside tables */
+
+details summary {
+    cursor: pointer;
+    color: var(--accent);
+    list-style: none;
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details summary::before {
+    content: "▸ ";
+    color: var(--accent);
+}
+
+details[open] summary::before {
+    content: "▾ ";
+}
+
+details summary:hover {
+    color: var(--accent-strong);
+}
+
+details ul {
+    margin: 0.5em 0 0;
+    padding-left: 1.2em;
+    color: var(--text-muted);
+    font-size: 0.94rem;
+}
+
+/* --------------------------------------------------------------------------
+   Publication metadata
+   -------------------------------------------------------------------------- */
 
 .abstractButton {
-    background-color: var(--other-light-color);
-    border: none;
-    font-size: inherit;
-    font-weight: bold; 
-    font-family: Verdana, serif;
-    color: var(--main-color);
-    padding: 0.1rem 0.4rem;
+    background-color: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    padding: 0.15rem 0.6rem;
     text-align: center;
-    text-decoration: none;
     display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.abstractButton:hover {
+    background-color: var(--accent);
+    color: var(--bg);
 }
 
 .abstract {
-    /* border-left: 0.4rem solid var(--light-color-hover); */
-    border-left: 0.4rem solid var(--other-light-color);
-    padding-left: 0.6rem;
-    margin-top: 0.4rem;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.9rem;
+    margin-top: 0.6rem;
+    color: var(--text-muted);
     font-style: italic;
     display: none;
-    max-width: 60%;
+    max-width: 60ch;
 }
 
-.authors, .occasion {
+.authors,
+.occasion {
     font-style: italic;
+    color: var(--text-muted);
     padding-bottom: 0.2rem;
 }
 
-.arxiv{
-    font-family: 'Courier New', Courier, monospace;
+.arxiv {
+    font-family: "Courier New", Courier, monospace;
 }
 
-.hal, .file, .published  {
-    font-family: Verdana, serif;
-    font-stretch: extra-expanded;
+.hal,
+.file,
+.published {
+    font-family: Verdana, sans-serif;
+    font-size: 0.9rem;
 }
+
+/* --------------------------------------------------------------------------
+   Figures
+   -------------------------------------------------------------------------- */
 
 .figure-wrapper {
-    /*max-width: 1000px; /* Largeur maximale de l'ensemble (optionnel, à adapter) */
-    margin: 40px auto; /* Centre le wrapper sur la page avec de l'espace haut/bas */
-    text-align: center; /* Centre les éléments enfants, y compris la légende */
+    margin: 2.5em auto 3em;
+    padding: 1.2em;
+    background-color: rgba(16, 28, 48, 0.55);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    text-align: center;
 }
 
-/* Conteneur spécifique pour les images et la flèche */
 .comparison-container {
-    display: flex; /* Active Flexbox */
-    align-items: center; /* Aligne verticalement au centre (images + flèche) */
-    justify-content: space-around; /* Espace équitablement les éléments */
-    flex-wrap: nowrap; /* Empêche de passer à la ligne sur petit écran */
-    margin-bottom: 20px; /* Espace avant le texte du dessous */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
 }
 
-/* Style commun pour les images */
 .comparison-image {
-    max-width: 40%; /* Chaque image prend au maximum 40% de la largeur du conteneur */
-    height: auto; /* Garde les proportions */
-    border: 1px solid #ddd; /* Optionnel : petite bordure */
-    border-radius: 4px; /* Optionnel : coins arrondis */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optionnel : légère ombre */
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
 }
 
-/* Style spécifique pour la grosse flèche rouge */
 .comparison-arrow {
-    flex: 0 0 auto; /* La flèche ne rétrécit pas et ne grandit pas */
-    font-size: 5em; /* Taille très grosse (adaptable) */
-    color: red; /* Couleur rouge */
-    line-height: 1; /* Aligne mieux la flèche verticalement */
-    padding: 0 10px; /* Espace horizontal autour de la flèche */
+    flex: 0 0 auto;
+    font-size: 3em;
+    color: var(--accent);
+    line-height: 1;
+    padding: 0 10px;
 }
 
-/* Style pour la légende centrée en dessous */
 .figure-caption {
-    font-size: 1.1em;
-    color: #bbb;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: var(--text-muted);
     margin: 0;
-    font-weight: normal; /* Change to 'bold' if you prefer */
+    font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    body {
+        margin-left: 0;
+        padding: 2em 1.4em 4em;
+    }
+
+    nav {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 2em 0 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border-soft);
+        margin-bottom: 2.5em;
+    }
+
+    nav .box {
+        max-width: 190px;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    nav p.name {
+        font-size: 1.9rem;
+    }
+
+    main {
+        font-size: 1.05rem;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    .comparison-container {
+        flex-wrap: wrap;
+    }
+
+    .comparison-image {
+        max-width: 100%;
+    }
+
+    .comparison-arrow {
+        transform: rotate(90deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
 }
